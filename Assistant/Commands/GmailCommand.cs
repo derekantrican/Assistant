@@ -23,6 +23,8 @@ namespace Assistant
             else
                 gmailTo = To;
 
+            gmailTo = Common.ProcessVariables(gmailTo);
+
             if (gmailTo == "me" || gmailTo == "self")
                 gmailTo = Functions.GetUserEmailAddress();
 
@@ -34,6 +36,8 @@ namespace Assistant
             }
             else
                 gmailSubject = Subject;
+
+            gmailSubject = Common.ProcessVariables(gmailSubject);
 
             Functions.SendGmail(gmailTo, gmailSubject, ""); //Todo: Support "body"
         }
