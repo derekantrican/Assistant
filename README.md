@@ -17,5 +17,5 @@ Assistant is supposed to be a quick way to "shortcut" the process of doing a lot
 ### Getting set up
 
 1. Download the repo and build so you have an `Assistant.exe` file
-2. Create a `%appdata%\Assistant` folder and inside that folder create a `Commands.xml` with the commands you want to define for Assistant (example: )
-3. *Optional:* Make a keyboard shortcut to quickly launch Assistant (example using AHK: )
+2. Create a `%appdata%\Assistant` folder and inside that folder create a `Commands.xml` with the commands you want to define for Assistant ([Example](https://github.com/derekantrican/Assistant/blob/master/Sample%20Files/Commands.xml))
+3. *Optional:* Make a keyboard shortcut to quickly launch Assistant ([Example using AHK](https://github.com/derekantrican/Assistant/blob/master/Sample%20Files/KeyboardShortcuts.ahk))
