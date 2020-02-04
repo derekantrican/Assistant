@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Illegal characters are single quotes, double quotes, ampersands, less than, greater than.
+    To be used, these must be encoded: &qpos; OR &quot; OR &amp; OR &lt; OR &gt;-->
+<Commands updated="5/16/2017 12:01">
+    <Command>
+        <Triggers>
+            <Trigger phrase="em"/>
+            <Trigger phrase="email"/>
+        </Triggers>
+        <Action exitAfterExecution="true"><!--will exit the program after execution of this command - true by default-->
+            <Gmail/><!--Can also specify the "to" and "subject" fields-->
+        </Action>
+    </Command>
+    <Command>
+        <Triggers>
+            <Trigger phrase="note"/>
+            <Trigger phrase="notepad"/>
+        </Triggers>
+        <Action>
+            <Launch path="C:\Windows\notepad.exe"/><!--Make it so you can start with a command line parameter?-->
+            <!--There can be multiple actions per command-->
+        </Action>
+        <Help text="Launches Notepad"/>
+    </Command>
+    <Command>
+        <Triggers>
+            <Trigger phrase="npp"/>
+        </Triggers>
+        <Action>
+            <Launch path="C:\Program Files (x86)\Notepad++\notepad++.exe"/>
+        </Action>
+        <Help text="Launches Notepad++"/>
+    </Command>
+    <Command>
+        <Triggers>
+            <Trigger phrase="paint"/>
+        </Triggers>
+        <Action>
+            <Launch path="C:\windows\system32\mspaint.exe"/>
+        </Action>
+    </Command>
+    <Command>
+        <Triggers>
+            <Trigger phrase="dailydigest"/>
+            <Trigger phrase="digest"/>
+            <Trigger phrase="today"/>
+            <Trigger phrase="events"/>
+        </Triggers>
+        <Action>
+            <List>
+                <GoogleCalendar startDate="{Today}" endDate="{Today}" returnAmount="20"/><!--COULD specify calendar (and multiple "calendar" attributes for multiple calendars) - defaults to all calendars. Can also specify returnAmount (defaults to 10)-->
+            </List>
+        </Action>
+    </Command>
+    <Command>
+        <Triggers>
+            <Trigger phrase="reminder"/>
+            <Trigger phrase="rem"/>
+        </Triggers>
+        <Action>
+            <Reminder><!--Actions for reminding are listed below-->
+                <Gmail to="self" subject="{ReminderSubject}"/>
+                <Gmail to="{ReminderTimeDotSeparated}@fut.io" subject="{ReminderSubject}"/>
+                <GoogleCalendarEvent title="{ReminderSubject}" startTime="{ReminderTime}" duration="30" calendar="Reminders"/><!--Duration is in min. Should be able to specify an endTime instead-->
+            </Reminder>
+        </Action>
+    </Command>
+    <Command>
+        <Triggers>
+            <Trigger phrase="proj"/>
+            <Trigger phrase="projects"/>
+        </Triggers>
+        <Action>
+            <List ActUponResults="true"><!--This bool determines whether you will be asked to choose an item from the list to do something with (defaults to false)-->
+                <Files fileType=".sln" folder="C:\Users\deantric\source\repos" includeSubFolders="true"/><!--Can specify multiple "fileType" attributes-->
+            </List>
+        </Action>
+    </Command>
+    <Command>
+        <Triggers>
+            <Trigger phrase="inbox"/>
+            <Trigger phrase="gmail"/>
+        </Triggers>
+        <Action>
+            <List ActUponResults="true">
+                <Gmail query="in:inbox" returnAmount="50"/><!--Can specify a query (e.g. "in:trash") attribute and a returnAmount attribute. Defaults to "in:inbox" and "10", respectively-->
+            </List>
+        </Action>
+    </Command>
+    <Command>
+        <Triggers>
+            <Trigger phrase="browse"/>
+            <Trigger phrase="url"/>
+            <Trigger phrase="folder"/>
+            <Trigger phrase="explore"/>
+        </Triggers>
+        <Action>
+            <Launch path="{leftoverInput}"/>
+        </Action>
+        <Help text="Launches a url. Syntax is &quot;browse {URL}&quot;"/>
+    </Command>
+    <Command>
+        <Triggers>
+            <Trigger phrase="settings"/>
+        </Triggers>
+        <Action>
+            <Launch path="C:\Users\deantric\AppData\Roaming\Assistant\Commands.xml"/>
+        </Action>
+    </Command>
+    <Command>
+        <Triggers>
+            <Trigger phrase="get email from"/>
+        </Triggers>
+        <Action>
+            <List ActUponResults="true">
+                <Gmail query="from:{leftoverInput} -in:chats" returnAmount="1"/><!--Can specify a query (e.g. "in:trash") attribute and a returnAmount attribute. Defaults to "in:inbox" and "10", respectively-->
+            </List>
+        </Action>
+    </Command>
+    <Command>
+        <Triggers>
+            <Trigger phrase="git"/>
+        </Triggers>
+        <Action>
+            <Launch path="C:\Program Files\Git\git-bash.exe" parameters="--cd=&quot;C:\Users\deantric\Source\Repos\SX_Core&quot;"/>
+        </Action>
+    </Command>
+</Commands>
