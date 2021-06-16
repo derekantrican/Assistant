@@ -14,6 +14,7 @@ namespace Assistant
         public override void RunCommand(string remainingInput = "")
         {
             UriBuilder pathOrURL = new UriBuilder(Common.ProcessVariables(LaunchPath, remainingInput));
+            Parameters = Common.ProcessVariables(Parameters, remainingInput);
 
             if (pathOrURL.Scheme == "file")
                 Common.StartProcess(pathOrURL.Uri.LocalPath, string.IsNullOrEmpty(Parameters) ? "" : Parameters);
