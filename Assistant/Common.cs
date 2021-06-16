@@ -281,7 +281,7 @@ namespace Assistant
         {
             //Start process via command line so that we aren't attached to the process
             ProcessStartInfo startInfo = new ProcessStartInfo() { WindowStyle = ProcessWindowStyle.Hidden, FileName = "cmd" };
-            startInfo.Arguments = "/C start \"\" \"" + uri + "\" " + parameters;
+            startInfo.Arguments = $"/C start \"\" \"{uri}\" {parameters}";
 
             Process startedProcess = Process.Start(startInfo);
             ActivateWindow(startedProcess.MainWindowHandle);
